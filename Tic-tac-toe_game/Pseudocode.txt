@@ -1,0 +1,104 @@
+PROGRAM TicTacToe// 
+
+===== FUNGSI UTAMA (MAIN) =====
+FUNCTION Main
+// 1. Inisialisasi
+SET papan = BuatPapanKosong()
+SET pemainSekarang = 'X'
+SET gameBerjalan = TRUE
+
+// 2. Loop Permainan Utama
+WHILE gameBerjalan is TRUE
+    TampilkanPapan(papan)
+    DISPLAY "Giliran pemain: " + pemainSekarang
+
+    // 3. Dapatkan Input Pemain
+    GET inputBaris
+    GET inputKolom
+
+    // 4. Validasi Langkah  
+    IF CekLangkahValid(papan, inputBaris, inputKolom) is TRUE THEN
+        // 5. Update Papan
+        papan[inputBaris][inputKolom] = pemainSekarang
+
+        // 6. Cek Kondisi Menang
+        IF CekPemenang(papan, pemainSekarang) is TRUE THEN
+            TampilkanPapan(papan)
+            DISPLAY "Selamat! Pemain " + pemainSekarang + " menang!"
+            SET gameBerjalan = FALSE // Hentikan permainan
+        
+        // 7. Cek Kondisi Seri
+        ELSE IF CekSeri(papan) is TRUE THEN
+            TampilkanPapan(papan)
+            DISPLAY "Permainan berakhir seri!"
+            SET gameBerjalan = FALSE // Hentikan permainan
+
+        // 8. Ganti Giliran Pemain
+        ELSE
+            IF pemainSekarang is 'X' THEN
+                SET pemainSekarang = 'O'
+            ELSE
+                SET pemainSekarang = 'X'
+            END IF
+        END IF
+    ELSE
+        // Jika langkah tidak valid
+        DISPLAY "Langkah tidak valid. Kotak sudah terisi atau di luar papan. Coba lagi."
+    END IF
+END WHILE
+
+DISPLAY "Permainan Selesai."
+
+END FUNCTION
+
+// ===== FUNGSI-FUNGSI BANTUAN =====
+
+// Fungsi untuk membuat papan 3x3 kosong
+FUNCTION BuatPapanKosong()
+CREATE papan_baru = sebuah grid 3x3FOR setiap sel di papan_baru
+SET sel = ' ' // Isi dengan spasi
+END FORRETURN papan_baru
+END FUNCTION
+
+// Fungsi untuk menampilkan papan ke layar
+FUNCTION TampilkanPapan(papan)
+FOR setiap baris di papan
+DISPLAY baris dengan pemisah '|'
+DISPLAY garis pemisah "---+---+---"
+END FOR
+END FUNCTION
+
+// Fungsi untuk mengecek apakah langkah yang dipilih pemain valid
+FUNCTION CekLangkahValid(papan, baris, kolom)
+
+// Cek apakah koordinat berada dalam rentang papan (0-2)
+IF baris >= 0 AND baris <= 2 AND kolom >= 0 AND kolom <= 2 THEN
+
+// Cek apakah kotak di papan masih kosong
+IF papan[baris][kolom] is ' ' THEN
+RETURN TRUE
+END IF
+END IF
+RETURN FALSE
+END FUNCTION
+
+// Fungsi untuk mengecek apakah ada pemenang
+FUNCTION CekPemenang(papan, pemain)
+// Cek 3 baris horizontal
+// Cek 3 kolom vertikal
+// Cek 2 diagonal
+IF ada 3 tanda 'pemain' yang berbaris lurus (horizontal, vertikal, atau diagonal) THEN
+RETURN TRUE
+ELSE
+RETURN FALSE
+END IF
+END FUNCTION
+
+// Fungsi untuk mengecek apakah papan sudah penuh (seri)
+FUNCTION CekSeri(papan)
+FOR setiap sel di papan
+IF sel is ' ' THEN
+RETURN FALSE // Masih ada kotak kosong, belum seri
+END IF
+END FOR
+RETURN TRUE // Semua kotak sudah terisiEND FUNCTIONEND PROGRAM

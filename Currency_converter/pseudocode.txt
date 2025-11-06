@@ -1,0 +1,13 @@
+START
+  ENTER the amount
+  SELECT source currency
+  SELECT target currency
+
+  FUNC currency_converter (source_currency, target_currency, amount)
+    IF source_currency is usd and target_currency is idr THEN
+      RETURN usd * 16.500
+    ELIF source_currency id idr and target_currency id usd THEN
+      RETURN idr / 16.500 
+
+  PRINT begining currency and new currency
+END
