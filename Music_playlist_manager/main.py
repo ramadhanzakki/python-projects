@@ -6,8 +6,17 @@ my_playlist = PlayList()
 my_playlist.add_song('Golden - HUNTRX/EJAE, Audrey Nuna, Rei Ami')
 my_playlist.add_song('In Another World - EJAE')
 my_playlist.add_song('FOCUS - Hearts2Hearts')
+my_playlist.add_song('House Party - VVUP')
 
 my_playlist.display()
+
+my_playlist.play_song('Golden - HUNTRX/EJAE, Audrey Nuna, Rei Ami')
+my_playlist.next_song()
+my_playlist.next_song()
+my_playlist.next_song()
+my_playlist.next_song()
+my_playlist.prev_song()
+my_playlist.play_song('Golden - HUNTRX/EJAE, Audrey Nuna, Rei Ami')
 
 print("\n--- 🔍 Intip isi Hash Table (song_index) ---")
 for title, node in my_playlist.song_index.items():

@@ -37,3 +37,39 @@ class PlayList:
             count += 1
 
         print('--------------------------')
+
+
+    def play_song(self, title):
+        if title in self.song_index:
+            node_to_play = self.song_index[title]
+            self.current_song = node_to_play
+            print(f'▶️ Playing {self.current_song.title}')
+
+        else:
+            print(f'[!] The song ‘{title}’ was not found in the playlist')
+
+
+    def next_song(self):
+        if self.current_song is None:
+            print('[!] No songs have been played yet. Play a song first.')
+            return
+        
+        if self.current_song.next is None:
+            print('[!] You have reached the end of the playlist.')
+            return
+        
+        self.current_song = self.current_song.next
+        print(f'▶️ Next up: {self.current_song.title}')
+
+    
+    def prev_song(self):
+        if self.current_song is None:
+            print('[!] No songs have been played yet. Play a song first.')
+            return
+        
+        if self.current_song.prev is None:
+            print('[!] You have reached the end of the playlist.')
+            return
+
+        self.current_song = self.current_song.prev
+        print(f'▶️ Play previous: {self.current_song.title}')
