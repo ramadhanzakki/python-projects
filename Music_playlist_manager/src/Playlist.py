@@ -1,4 +1,5 @@
 from src.SongNode import SongNode
+import random
 
 class PlayList:
     def __init__(self):
@@ -26,7 +27,7 @@ class PlayList:
 
     def display(self):
         if self.head is None:
-            print('Your playlist is currently empty')
+            print('[!]Your playlist is currently empty')
             return
         
         print('--- 🎵 My Playlist 🎵 ---')
@@ -87,4 +88,34 @@ class PlayList:
         print('--- 📜 Play History (Most Recent) 📜 ---')
         for i, title in enumerate(reversed(self.play_history), start=1):
             print(f'{i}. {title}')
-            
+
+
+    def shuffle(self):
+        if self.head is None or self.head.next is None:
+            print('[!] Not enough songs to shuffle')
+            return
+        
+        current = self.head
+        song_array = []
+
+        while current:
+            song_array.append(current)
+            current = current.next
+
+        random.shuffle(song_array)
+
+        for i in range(len(song_array)):
+            node = song_array[i]
+            if i == 0:
+                node.prev = None
+            elif i > 0:
+                node.prev = song_array[i - 1]
+
+            if i == len(song_array) - 1:
+                node.next = None
+            elif i < len(song_array) - 1:
+                node.next = song_array[i + 1]
+
+        self.head = song_array[0]
+        self.tail = song_array[-1]
+        self.current_song = None
