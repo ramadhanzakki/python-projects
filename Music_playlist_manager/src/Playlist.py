@@ -137,4 +137,53 @@ class PlayList:
         print("--- 🎵 Playlist (Versi Rekursif) 🎵 ---")
 
         self.display_helper(self.head, 1)
+
+
+    def _merge_sort(self, left_arr, right_arr):
+        result = []
+        i = 0
+        j = 0
+
+        while i <= len(left_arr) - 1 and j <= len(right_arr)- 1:
+            if left_arr[i] < right_arr[j]:
+                result.append(left_arr[i])
+                i += 1
+            else:
+                result.append(right_arr[j])
+                j += 1
+
+        result.extend(left_arr[i:])
+        result.extend(right_arr[j:])
+
+        return result
+
+
+    def sorted_titles(self, arr):
+        if len(arr) <= 1:
+            return arr
         
+        mid = len(arr) // 2
+
+        left_half = arr[:mid]
+        right_half = arr[mid:]
+
+        sorted_left = self.sorted_titles(left_half)
+        sorted_right = self.sorted_titles(right_half)
+
+        return self._merge_sort(sorted_left,sorted_right)
+
+
+    def display_sorted(self):
+        title_array = []
+
+        current = self.head
+        while current:
+            title_array.append(current.title)
+            current = current.next
+
+        sort_titles = self.sorted_titles(title_array)
+
+        print("--- 🎵 Playlist (Terurut A-Z) 🎵 ---")
+
+        for i, title in enumerate(sort_titles, start=1):
+            print(f'{i}. {title}')
