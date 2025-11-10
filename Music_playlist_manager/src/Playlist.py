@@ -119,3 +119,22 @@ class PlayList:
         self.head = song_array[0]
         self.tail = song_array[-1]
         self.current_song = None
+
+
+    def display_helper(self, current_node, count):
+        if current_node == None:
+            return
+        
+        print(f'{count}. {current_node.title}')
+        self.display_helper(current_node.next, count + 1)
+
+
+    def display_recursive(self):
+        if self.head == None:
+            print('[!] Playlist is Empty')
+            return
+        
+        print("--- 🎵 Playlist (Versi Rekursif) 🎵 ---")
+
+        self.display_helper(self.head, 1)
+        
