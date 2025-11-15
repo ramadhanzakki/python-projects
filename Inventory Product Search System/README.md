@@ -46,7 +46,7 @@ Inventory-Product-Search/
 1. **Clone the repository:**
     
     ```
-    git clone [https://github.com/YourUsername/Inventory-Product-Search.git](https://github.com/YourUsername/Inventory-Product-Search.git)
+    git clone [https://github.com/ramadhanzakki/Inventory-Product-Search.git](https://github.com/ramadhanzakki/Inventory-Product-Search.git)
     ```
     
 2. **Navigate to the project directory:**
