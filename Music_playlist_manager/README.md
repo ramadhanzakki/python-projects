@@ -59,13 +59,13 @@ To display songs alphabetically, the project implements the **Merge Sort** algor
 1. **Clone the repository:**
     
     ```
-    git clone [https://github.com/yourusername/PyPlaylist.git](https://github.com/yourusername/PyPlaylist.git)
+    git clone [https://github.com/ramadhanzakki/python-projects/Music_playlist_manager](https://github.com/ramadhanzakki/python-projects/Music_playlist_manager)
     ```
     
 2. **Navigate to the project directory:**
     
     ```
-    cd PyPlaylist
+    cd Music_playlist_manager
     ```
     
 3. **Run the application (demo/test script):**
