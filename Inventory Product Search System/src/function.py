@@ -53,8 +53,6 @@ class SearchingAlgorithm:
                 ((target_id - self.data[low]['id']) * (high -
                  low) // (self.data[high]['id'] - self.data[low]['id']))
 
-            print(f'Low: {low}, High: {high}, Pos: {pos}')
-
             guess = self.data[pos]
 
             if guess['id'] == target_id:
