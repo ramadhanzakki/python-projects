@@ -35,15 +35,16 @@ def main():
         target_length = 6
 
     while True:
+        rand_nums_arr = Transform(rand_nums)
+
         # User input
         try:
-            answer = int(input('Guess: '))
+            answer = int(input('Guess ' + str(len(rand_nums_arr.changeToArray())) + '-digit number: '))
         except ValueError:
             print(f'WARNING⚠️: Guess is number only')
             continue
         
         # Transform answer to array
-        rand_nums_arr = Transform(rand_nums)
         answer_arr = Transform(answer)
 
         # Check
