@@ -1,7 +1,8 @@
 import random
-from src.transform import Transform
+from src.transform import Tools
 from src.bullcheck import BullCheck
 from src.cowcheck import CowCheck
+from src.hint import Hint
 
 
 def main():
@@ -34,18 +35,25 @@ def main():
         rand_nums = random.randrange(100000, 999999, 1)
         target_length = 6
 
+    count = 0
+    rand_nums_arr = Tools(rand_nums)
+
     while True:
-        rand_nums_arr = Transform(rand_nums)
+        count += 1
+
+        if count % 3 == 0:
+            rand_hint = Hint(rand_nums_arr.changeToArray())
+            print(f'💡Hint: One of the numbers is {rand_hint.hintAnswer()}')
 
         # User input
         try:
-            answer = int(input('Guess ' + str(len(rand_nums_arr.changeToArray())) + '-digit number: '))
+            answer = int(input(f'Guess {target_length}-digit number: '))
         except ValueError:
             print(f'WARNING⚠️: Guess is number only')
             continue
         
-        # Transform answer to array
-        answer_arr = Transform(answer)
+        # Tools answer to array
+        answer_arr = Tools(answer)
 
         # Check
         cow = CowCheck(answer_arr.changeToArray(), rand_nums_arr.changeToArray())

@@ -1,4 +1,6 @@
-class Transform:
+import random
+
+class Tools:
     def __init__(self, inputNum):
         self.input = inputNum
 
