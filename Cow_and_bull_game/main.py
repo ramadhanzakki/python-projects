@@ -41,19 +41,28 @@ def main():
     while True:
         count += 1
 
+        # Hint answer
         if count % 3 == 0:
             rand_hint = Hint(rand_nums_arr.changeToArray())
             print(f'💡Hint: One of the numbers is {rand_hint.hintAnswer()}')
 
         # User input
-        try:
-            answer = int(input(f'Guess {target_length}-digit number: '))
-        except ValueError:
-            print(f'WARNING⚠️: Guess is number only')
-            continue
-        
-        # Tools answer to array
-        answer_arr = Tools(answer)
+        while True:
+            try:
+                answer = int(input(f'Guess {target_length}-digit number: '))
+
+                # Tools answer to array
+                answer_arr = Tools(answer)
+
+                # Error handling for wrong guess length
+                if len(answer_arr.changeToArray()) != target_length:
+                    print(f'WARNING⚠️: You have to guess {target_length} numbers')
+                    continue
+
+                break
+            except ValueError:
+                print(f'WARNING⚠️: Guess is number only')
+                continue
 
         # Check
         cow = CowCheck(answer_arr.changeToArray(), rand_nums_arr.changeToArray())
