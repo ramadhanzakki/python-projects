@@ -34,7 +34,7 @@ Ensure you have Python installed on your computer.
     
 
 ```
-python password_checker.py
+python main.py
 ```
 
 _(Note: Make sure your Python filename matches, e.g., `password_checker.py`)_
