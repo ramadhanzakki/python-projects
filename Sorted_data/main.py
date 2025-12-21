@@ -6,14 +6,14 @@ def main():
     print('            Sorting Data')
     print('===================================')
 
-    print('\n---Bubble Sort---')
+    print('\n--- Sort ---')
     print(f'Random Data: {random_number}')
 
     sorted_data = Sort(random_number)
 
-    sorted_data.insertion_sort()
+    new_data = sorted_data.quick_sort(random_number)
 
-    print(f'Sorted Data: {random_number}')
+    print(f'Sorted Data: {new_data}')
 
 
 if __name__ == "__main__":
