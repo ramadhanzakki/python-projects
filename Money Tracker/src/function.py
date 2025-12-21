@@ -25,9 +25,13 @@ class Tracker:
             with open(self.filename, mode='r') as file:
                 reader = csv.reader(file)
                 for row in reader:
-                    date, amount, category, description = row
-                    transaction = Transaction(date, float(amount), category, description)
-                    transactions.append(transaction)
+                    try:
+                        if len(row) == 4:
+                            date, amount, category, description = row
+                            transaction = Transaction(date, float(amount), category, description)
+                            transactions.append(transaction)
+                    except ValueError:
+                        continue  # Skip rows with invalid data
         except FileNotFoundError:
             pass  # If file doesn't exist, return empty list
         return transactions
