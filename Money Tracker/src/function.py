@@ -7,15 +7,16 @@ class Transaction:
         self.category = category
         self.description = description
 
-    # Method to save transaction to CSV
-    def add_transaction(self, filename='data/database.csv'):
-        with open(filename, mode='a', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow([self.date, self.amount, self.category, self.description])
 
 class Tracker:
     def __init__(self, filename='data/database.csv'):
         self.filename = filename
+
+    # Method to save transaction to CSV
+    def save_transaction(self, transaction):
+        with open(self.filename, mode='a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow([transaction.date, transaction.amount, transaction.category, transaction.description])
 
     # Method to load transactions from CSV
     def load_transactions(self):

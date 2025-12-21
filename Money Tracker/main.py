@@ -31,12 +31,28 @@ def main():
         # Handle user choices
         if choice == 1:
             print("Add Transaction selected.")
+
+            # Transaction details
+            print("1. Income (+) | 2. Expense (-)")
+            t_type = int(input("Select type: "))
+
+            # Get transaction details
             amount = float(input("Enter amount: "))
+
+            # Adjust amount sign based on transaction type
+            if t_type == 2:
+                amount = -abs(amount)  # Make amount negative for expenses
+
+            # Other details
             category = input("Enter category: ")
             description = input("Enter description: ")
             date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            transaction = Transaction(date, amount, category, description)
-            transaction.add_transaction()
+
+            # Create and save transaction
+            new_t = Transaction(date, amount, category, description)
+            tracker.save_transaction(new_t)
+
+            # Confirmation message
             print("Transaction added successfully.")
 
         elif choice == 2:
