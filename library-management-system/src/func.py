@@ -31,10 +31,25 @@ class Book:
         return f"Book(title='{self.title}', author='{self.author}', id='{self.id}', is_available={self.is_available})"
 
 class Member:
-    def __init__(self, name, id):
+    def __init__(self, name, id, borrowed_books=None):
         self.name = name
         self.id = id
-        self.borrowed_books = []
+        if borrowed_books is None:
+            self.borrowed_books = []
+        else:
+            self.borrowed_books = borrowed_books
+
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'id': self.id,
+            'borrowed_books': [book.to_dict() for book in self.borrowed_books]
+        }
+
+    @staticmethod
+    def from_dict(data):
+        borrowed_books = [Book.from_dict(book) for book in data['borrowed_books']]
+        return Member(data['name'], data['id'], borrowed_books)
 
     def borrow_book(self, book):
         if book.is_available:
@@ -80,8 +95,30 @@ class Library:
         self.members = []
         self.data_folder = 'data'
         self.books_file = 'books.json'
+        self.member_file = os.path.join(self.data_folder, 'members.json')
         self.db_path = os.path.join(self.data_folder, self.books_file)
         self.load_books()
+        self.load_members()
+
+    def save_members(self):
+        if not os.path.exists(self.data_folder):
+            os.makedirs(self.data_folder)
+
+        data = [member.to_dict() for member in self.members]
+
+        with open(self.member_file, 'w') as f:
+            json.dump(data, f, indent=4)
+
+    def load_members(self):
+        if os.path.exists(self.member_file):
+            try:
+                with open(self.member_file, 'r') as f:
+                    members_data = json.load(f)
+                    self.members = [Member.from_dict(member) for member in members_data]
+            except FileNotFoundError:
+                self.members = []
+        else:
+            self.members = []
 
     def load_books(self,):
         if os.path.exists(self.data_folder):
@@ -109,6 +146,7 @@ class Library:
 
     def register_member(self, member):
         self.members.append(member)
+        self.save_members()
 
     def lend_book(self, book_id, member_id):
         book = next((b for b in self.books if b.id == book_id), None)
@@ -116,6 +154,8 @@ class Library:
 
         if book and member:
             member.borrow_book(book)
+            self.save_members()
+            self.save_books()
         else:
             return 0;
 
@@ -125,6 +165,8 @@ class Library:
 
         if book and member:
             member.return_book(book)
+            self.save_members()
+            self.save_books()
         else:
             return 0;
 
