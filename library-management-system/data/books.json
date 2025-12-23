@@ -1,0 +1,16 @@
+[
+    {
+        "title": "Atomic Habits",
+        "author": "James Clear",
+        "id": "1234",
+        "is_available": true,
+        "due_date": null
+    },
+    {
+        "title": "Bumi",
+        "author": "Tere Liye",
+        "id": "235626",
+        "is_available": true,
+        "due_date": null
+    }
+]
