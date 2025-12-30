@@ -1,0 +1,4 @@
+stock_venv/
+pycache/*.pyc
+*.png
+.vscode/
