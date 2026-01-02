@@ -20,7 +20,7 @@ class WeatherProvider:
 
 
 class WeatherDashboard:
-    def __init__(self, city: str, key="75362e63c015a77c4d79c585a4e7001a"):
+    def __init__(self, city: str, key:str):
         self.city = city
         self.provider = WeatherProvider(key)
 
