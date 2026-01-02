@@ -31,7 +31,7 @@ class WeatherDashboard:
             print(f'\nCurrent Weather Report:')
             print(f'- City : {data['name']}')
             print(f'- Temperature : {data['main']['temp']}°C')
-            print(f'- Conditions: {data['weather'][1]['description']}')
+            print(f'- Conditions: {data['weather'][0]['description']}')
 
         except Exception as e:
             print(f'Error : {e}')
